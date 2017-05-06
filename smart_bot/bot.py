@@ -8,8 +8,6 @@ def do_task():
 
 	doc = frappe.get_single("Backup Meta")
 
-	print " *** if not doc.stop: {}".format(doc.stop)
-
 	if not int(doc.stop):
 		doc.sync()
 		print " *** doc.sync()"

@@ -47,7 +47,6 @@ app_license = "General Public License v3"
 
 # before_install = "smart_bot.install.before_install"
 after_install = "smart_bot.boot.after_install"
-before_uninstall = "smart_bot.boot.before_uninstall"
 
 # Desk Notifications
 # ------------------

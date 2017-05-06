@@ -5,6 +5,11 @@ frappe.ui.form.on('Backup Meta', {
 	refresh: function(frm) {
 
 	},
+	github_url: function(frm) {
+		$c('runserverobj', { "method": "add_remote", "docs": frm.doc }, function(respose){
+			frm.save()
+		})
+	},
 	password: function(frm){
 		frm.save()
 	},
