@@ -49,7 +49,7 @@ class BackupMeta(Document):
 
 	def add_remote(self):
 		from smart_bot.api import validate_URL
-		validate_URL(self.github_url)
+		# validate_URL(self.github_url)
 		self.runc("Add Remote")
 
 	def runc(self, action):
@@ -60,7 +60,7 @@ class BackupMeta(Document):
 		self.change_directory(BACKUP_PATH.format(site)) # to move to the backup folder
 
 		if(action == "Add"):
-			gadd = GIT_ADD.format(site)
+			gadd = GIT_ADD.format(self.hostname if self.hostname else site)
 			execute(gadd)
 		elif(action == "Commit"):
 			gcommit = GIT_COMMIT.format(timestamp)
@@ -69,7 +69,8 @@ class BackupMeta(Document):
 			execute(GIT_PUSH)
 		elif(action == "Backup"):
 			password = self.get_password()
-			dump_site = DUMP_DATABASE.format(self.root_user, password, self.database, site)
+			filename = self.hostname if self.hostname else site
+			dump_site = DUMP_DATABASE.format(self.root_user, password, self.database, filename)
 			execute(dump_site)
 		elif(action == "Add Remote"):
 			git_remote = REMOTE_ADD.format(self.github_url)
