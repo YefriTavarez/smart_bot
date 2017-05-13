@@ -49,7 +49,7 @@ class BackupMeta(Document):
 
 	def add_remote(self):
 		from smart_bot.api import validate_URL
-		# validate_URL(self.github_url)
+		validate_URL(self.github_url)
 		self.runc("Add Remote")
 
 	def runc(self, action):

@@ -19,7 +19,13 @@ def validate_URL(string):
 	regex = get_regex()
 
 	if not regex.match(string):
-		frappe.throw("Invalid URL")
+		frappe.throw("""
+			Git URL should be as follow: <br>
+				<ul>
+					<li>git@github:username/project.git</li>
+				</ul>
+				You can find more info <a>here</a>
+			""")
 
 	return True
 
@@ -27,11 +33,12 @@ def get_regex():
 	import re # regular expresion library
 
 	regex = re.compile(
-        r'^(?:http|ftp)s?://' # http:// or https://
+        # r'^(?:http|ftp)s?://' # http:// or https://
+        r'(git@)?'
         r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' #domain...
         r'localhost|' #localhost...
         r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
-        r'(?::\d+)?' # optional port
+        r'(\:[A-Z0-9]+)?' # optional port
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
 	return regex
 
